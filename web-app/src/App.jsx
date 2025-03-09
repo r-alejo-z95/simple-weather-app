@@ -1,8 +1,7 @@
 import "./App.css";
 
 import { useState } from "react";
-import { Card, CardTitle, CardContent } from "./components/ui/card";
-import { Button } from "./components/ui/button";
+import { CityCard } from "./components/ui/citycard";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
 function App() {
@@ -46,16 +45,7 @@ function App() {
           <p>Add up to 3 cities</p>
         </div>
 
-        <div id="card" className="flex flex-row justify-evenly gap-1">
-          <Card>
-            <CardTitle>City</CardTitle>
-            <CardContent>Weather animation</CardContent>
-            <CardContent>Temperature</CardContent>
-            <CardContent>
-              <Button onClick={toggleUnit}>C°</Button>
-            </CardContent>
-          </Card>
-        </div>
+        <CityCard />
 
         <div className="flex justify-center">
           <AddCityButton onClick={addCity}>Add city</AddCityButton>
