@@ -29,7 +29,10 @@ function CardTitle({ className, ...props }) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn(
+        "leading-none font-semibold flex justify-center",
+        className
+      )}
       {...props}
     />
   );
@@ -49,7 +52,7 @@ function CardContent({ className, ...props }) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6", className)}
+      className={cn("px-6 flex justify-center", className)}
       {...props}
     />
   );
