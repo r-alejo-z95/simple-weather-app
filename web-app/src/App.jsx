@@ -45,7 +45,9 @@ function App() {
           <p>Add up to 3 cities</p>
         </div>
 
-        <CityCard />
+        <div id="card" className="flex flex-row justify-evenly gap-1">
+          <CityCard location={location} />
+        </div>
 
         <div className="flex justify-center">
           <AddCityButton onClick={addCity}>Add city</AddCityButton>
