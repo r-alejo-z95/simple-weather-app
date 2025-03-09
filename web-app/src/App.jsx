@@ -1,9 +1,32 @@
 import "./App.css";
-import { Card, CardHeader, CardTitle, CardContent } from "./components/ui/card";
+
+import { useState, useEffect } from "react";
+import { Card, CardTitle, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
 function App() {
+  const [city, setCity] = useState("New York");
+  const [temperature, setTemperature] = useState(null);
+  const [unit, setUnit] = useState("metric");
+
+  const apiKey = import.meta.env.WEATHER_API_KEY;
+  const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch(apiUrl);
+    };
+  });
+
+  const toggleUnit = () => {
+    console.log("changed");
+  };
+
+  const addCity = () => {
+    console.log("city added");
+  };
+
   return (
     <>
       <div className="flex flex-col m-10 gap-5">
@@ -18,13 +41,13 @@ function App() {
             <CardContent>Weather animation</CardContent>
             <CardContent>Temperature</CardContent>
             <CardContent>
-              <Button>C°</Button>
+              <Button onClick={toggleUnit}>C°</Button>
             </CardContent>
           </Card>
         </div>
 
         <div className="flex justify-center">
-          <AddCityButton>Add city</AddCityButton>
+          <AddCityButton onClick={addCity}>Add city</AddCityButton>
         </div>
       </div>
     </>
