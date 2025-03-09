@@ -34,7 +34,13 @@ const buttonVariants = cva(
   }
 );
 
-function Button({ className, variant, size, asChild = false, ...props }) {
+function AddCityButton({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}) {
   const Comp = asChild ? Slot : "button";
 
   return (
@@ -49,4 +55,4 @@ function Button({ className, variant, size, asChild = false, ...props }) {
   );
 }
 
-export { Button, buttonVariants };
+export { AddCityButton, buttonVariants };
