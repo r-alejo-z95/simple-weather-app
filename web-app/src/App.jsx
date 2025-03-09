@@ -6,18 +6,20 @@ import { Button } from "./components/ui/button";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
 function App() {
-  const [city, setCity] = useState("New York");
+  const [city, setCity] = useState("Tumbaco");
   const [temperature, setTemperature] = useState(null);
   const [unit, setUnit] = useState("metric");
 
-  const apiKey = import.meta.env.WEATHER_API_KEY;
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
   const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(apiUrl);
+      console.log(result);
     };
-  });
+    fetchData();
+  }, []);
 
   const toggleUnit = () => {
     console.log("changed");
