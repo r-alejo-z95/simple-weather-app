@@ -5,7 +5,7 @@ import { CityCard } from "./components/ui/citycard";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
 function App() {
-  const [location, setLocation] = useState("Tumbaco");
+  const location = "London";
   const [temperature, setTemperature] = useState(null);
   const [unit, setUnit] = useState("metric");
 
