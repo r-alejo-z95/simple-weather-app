@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import { CityCard } from "./components/ui/citycard";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
+const units = {
+  celsius: "°C",
+  fahrenheit: "°F",
+};
+
 function App() {
   const [location, setLocation] = useState("London");
   const [temperature, setTemperature] = useState(null);
-  const [unit, setUnit] = useState("Celsius");
-  const celsius = "Celsius";
-  const farenheit = "Farenheit";
+  const [unit, setUnit] = useState(units.celsius);
 
   // API fetch
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -25,32 +28,22 @@ function App() {
 
       const data = await response.json();
 
-      if (unit === celsius) {
+      if (unit === units.celsius) {
         setTemperature(data.current.temp_c);
-      } else if (unit === farenheit) {
+      } else if (unit === units.fahrenheit) {
         setTemperature(data.current.temp_f);
       }
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
       return null;
     }
   };
 
-  console.table([location, temperature, unit]);
-
   // Fetch data on location change
   useEffect(() => {
     fetchData();
-  }, [location]);
-
-  // const toggleUnit = () => {
-  //   console.log("changed");
-  // };
-
-  // const addCity = () => {
-  //   console.log("city added");
-  // };
+  }, [location, unit]);
 
   return (
     <>
@@ -64,8 +57,10 @@ function App() {
           <CityCard
             location={location}
             onLocationChange={setLocation}
+            onUnitChange={setUnit}
             temperature={temperature}
             unit={unit}
+            units={units}
           />
         </div>
 

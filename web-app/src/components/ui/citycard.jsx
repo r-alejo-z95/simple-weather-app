@@ -6,9 +6,15 @@ import {
   TempDisplay,
   UnitToggle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
-function CityCard({ location, onLocationChange, temperature, unit }) {
+function CityCard({
+  location,
+  onLocationChange,
+  temperature,
+  unit,
+  units,
+  onUnitChange,
+}) {
   return (
     <>
       <Card>
@@ -20,9 +26,11 @@ function CityCard({ location, onLocationChange, temperature, unit }) {
         <TempDisplay>
           {temperature} {unit}
         </TempDisplay>
-        <UnitToggle>
-          <Button>C°</Button>
-        </UnitToggle>
+        <UnitToggle
+          initialUnit={unit}
+          onUnitChange={onUnitChange}
+          units={units}
+        />
       </Card>
     </>
   );

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 function Card({ className, ...props }) {
   return (
@@ -33,7 +34,24 @@ function CardTitle({ initialCityName, onCityNameChange }) {
       setCityName(initialCityName);
       onCityNameChange(initialCityName);
     } else {
-      onCityNameChange(cityName.trim());
+      setCityName(
+        cityName
+          .split(" ")
+          .map(
+            (word) =>
+              word.trim().charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ")
+      );
+      onCityNameChange(
+        cityName
+          .split(" ")
+          .map(
+            (word) =>
+              word.trim().charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ")
+      );
     }
     setIsEditing(false);
   };
@@ -89,13 +107,23 @@ function TempDisplay({ className, ...props }) {
   );
 }
 
-function UnitToggle({ className, ...props }) {
+function UnitToggle({ initialUnit, onUnitChange, units }) {
+  const [measureUnit, setMeasureUnit] = useState(initialUnit);
+
+  const toggleUnit = () => {
+    const newUnit =
+      measureUnit === units.celsius ? units.fahrenheit : units.celsius;
+    setMeasureUnit(newUnit);
+    onUnitChange(newUnit);
+  };
+
   return (
-    <div
-      data-slot="card-content"
-      className={cn("px-6 flex justify-center", className)}
-      {...props}
-    />
+    <div data-slot="card-content" className={cn("px-6 flex justify-center")}>
+      <Button onClick={toggleUnit}>
+        Switch to{" "}
+        {measureUnit === units.celsius ? units.fahrenheit : units.celsius}
+      </Button>
+    </div>
   );
 }
 
