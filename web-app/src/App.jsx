@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CityCard } from "./components/ui/citycard";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
@@ -8,7 +8,10 @@ function App() {
   const [location, setLocation] = useState("London");
   const [temperature, setTemperature] = useState(null);
   const [unit, setUnit] = useState("Celsius");
+  const celsius = "Celsius";
+  const farenheit = "Farenheit";
 
+  // API fetch
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
   const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
 
@@ -21,13 +24,25 @@ function App() {
       }
 
       const data = await response.json();
-      // return data;
-      console.log(data);
+
+      if (unit === celsius) {
+        setTemperature(data.current.temp_c);
+      } else if (unit === farenheit) {
+        setTemperature(data.current.temp_f);
+      }
+      // console.log(data);
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
       return null;
     }
   };
+
+  console.table([location, temperature, unit]);
+
+  // Fetch data on location change
+  useEffect(() => {
+    fetchData();
+  }, [location]);
 
   // const toggleUnit = () => {
   //   console.log("changed");
@@ -46,7 +61,12 @@ function App() {
         </div>
 
         <div id="card" className="flex flex-row justify-evenly gap-1">
-          <CityCard location={location} onLocationChange={setLocation} />
+          <CityCard
+            location={location}
+            onLocationChange={setLocation}
+            temperature={temperature}
+            unit={unit}
+          />
         </div>
 
         <div className="flex justify-center">

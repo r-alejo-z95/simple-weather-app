@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-function CityCard({ location, onLocationChange }) {
+function CityCard({ location, onLocationChange, temperature, unit }) {
   return (
     <>
       <Card>
@@ -17,7 +17,9 @@ function CityCard({ location, onLocationChange }) {
           onCityNameChange={onLocationChange}
         />
         <WeatherAnimation>Weather animation</WeatherAnimation>
-        <TempDisplay>Temperature</TempDisplay>
+        <TempDisplay>
+          {temperature} {unit}
+        </TempDisplay>
         <UnitToggle>
           <Button>C°</Button>
         </UnitToggle>
