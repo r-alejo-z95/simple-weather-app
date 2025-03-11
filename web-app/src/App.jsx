@@ -42,7 +42,7 @@ function App() {
       <div className="flex flex-col m-10 gap-5">
         <div className="flex flex-col place-items-center gap-8">
           <h1 className="font-bold text-4xl ">Simple Weather</h1>
-          <p>Add up to 3 cities</p>
+          <p>Add up to 3 locations</p>
         </div>
 
         <div id="card" className="flex flex-row justify-evenly gap-1">
