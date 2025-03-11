@@ -16,7 +16,7 @@ function Card({ className, ...props }) {
   );
 }
 
-function CardTitle({ initialCityName, className, ...props }) {
+function CardTitle({ initialCityName, onCityNameChange }) {
   const [cityName, setCityName] = useState(initialCityName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -29,6 +29,12 @@ function CardTitle({ initialCityName, className, ...props }) {
   };
 
   const handleExitEditMode = () => {
+    if (cityName.trim() === "" || !/^[a-zA-Z\s]*$/.test(cityName)) {
+      setCityName(initialCityName);
+      onCityNameChange(initialCityName);
+    } else {
+      onCityNameChange(cityName.trim());
+    }
     setIsEditing(false);
   };
 
@@ -52,10 +58,8 @@ function CardTitle({ initialCityName, className, ...props }) {
         <div
           data-slot="card-title"
           className={cn(
-            "leading-none font-semibold flex justify-center cursor-pointer",
-            className
+            "leading-none font-semibold flex justify-center cursor-pointer"
           )}
-          {...props}
           onClick={handleClick}
         >
           {cityName}
@@ -65,7 +69,7 @@ function CardTitle({ initialCityName, className, ...props }) {
   );
 }
 
-function CardContent({ className, ...props }) {
+function WeatherAnimation({ className, ...props }) {
   return (
     <div
       data-slot="card-content"
@@ -75,4 +79,24 @@ function CardContent({ className, ...props }) {
   );
 }
 
-export { Card, CardTitle, CardContent };
+function TempDisplay({ className, ...props }) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-6 flex justify-center", className)}
+      {...props}
+    />
+  );
+}
+
+function UnitToggle({ className, ...props }) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-6 flex justify-center", className)}
+      {...props}
+    />
+  );
+}
+
+export { Card, CardTitle, WeatherAnimation, TempDisplay, UnitToggle };

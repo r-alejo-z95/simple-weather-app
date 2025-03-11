@@ -5,9 +5,9 @@ import { CityCard } from "./components/ui/citycard";
 import { AddCityButton } from "./components/ui/addcitybutton";
 
 function App() {
-  const location = "London";
+  const [location, setLocation] = useState("London");
   const [temperature, setTemperature] = useState(null);
-  const [unit, setUnit] = useState("metric");
+  const [unit, setUnit] = useState("Celsius");
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
   const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
@@ -21,21 +21,21 @@ function App() {
       }
 
       const data = await response.json();
-      return data;
-      // console.log(data);
+      // return data;
+      console.log(data);
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
       return null;
     }
   };
 
-  const toggleUnit = () => {
-    console.log("changed");
-  };
+  // const toggleUnit = () => {
+  //   console.log("changed");
+  // };
 
-  const addCity = () => {
-    console.log("city added");
-  };
+  // const addCity = () => {
+  //   console.log("city added");
+  // };
 
   return (
     <>
@@ -46,11 +46,11 @@ function App() {
         </div>
 
         <div id="card" className="flex flex-row justify-evenly gap-1">
-          <CityCard location={location} />
+          <CityCard location={location} onLocationChange={setLocation} />
         </div>
 
         <div className="flex justify-center">
-          <AddCityButton onClick={addCity}>Add city</AddCityButton>
+          <AddCityButton>Add city</AddCityButton>
         </div>
       </div>
     </>
