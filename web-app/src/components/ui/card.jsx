@@ -30,7 +30,7 @@ function CardTitle({ className, ...props }) {
     <div
       data-slot="card-title"
       className={cn(
-        "leading-none font-semibold flex justify-center",
+        "leading-none font-semibold flex justify-center cursor-pointer",
         className
       )}
       {...props}
