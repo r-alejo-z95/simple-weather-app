@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: "https://r-alejo-z95.github.io/simple-weather-app/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
