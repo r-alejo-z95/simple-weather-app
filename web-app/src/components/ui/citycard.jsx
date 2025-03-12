@@ -2,7 +2,7 @@ import * as React from "react";
 import {
   Card,
   CardTitle,
-  WeatherAnimation,
+  WeatherIcon,
   TempDisplay,
   UnitToggle,
 } from "@/components/ui/card";
@@ -22,7 +22,7 @@ function CityCard({
           initialCityName={location}
           onCityNameChange={onLocationChange}
         />
-        <WeatherAnimation>Weather animation</WeatherAnimation>
+        <WeatherIcon />
         <TempDisplay>
           {temperature} {unit}
         </TempDisplay>

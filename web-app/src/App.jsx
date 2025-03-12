@@ -13,6 +13,7 @@ function App() {
   const [location, setLocation] = useState("London");
   const [temperature, setTemperature] = useState(null);
   const [unit, setUnit] = useState(units.celsius);
+  const [icon, setIcon] = useState();
 
   // API fetch
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -65,7 +66,7 @@ function App() {
         </div>
 
         <div className="flex justify-center">
-          <AddCityButton>Add city</AddCityButton>
+          <AddCityButton>Add Location</AddCityButton>
         </div>
       </div>
     </>

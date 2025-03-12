@@ -87,7 +87,7 @@ function CardTitle({ initialCityName, onCityNameChange }) {
   );
 }
 
-function WeatherAnimation({ className, ...props }) {
+function WeatherIcon({ className, ...props }) {
   return (
     <div
       data-slot="card-content"
@@ -127,4 +127,4 @@ function UnitToggle({ initialUnit, onUnitChange, units }) {
   );
 }
 
-export { Card, CardTitle, WeatherAnimation, TempDisplay, UnitToggle };
+export { Card, CardTitle, WeatherIcon, TempDisplay, UnitToggle };
