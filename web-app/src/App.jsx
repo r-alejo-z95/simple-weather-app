@@ -2,7 +2,6 @@ import "./App.css";
 
 import { useState, useEffect } from "react";
 import { CityCard } from "./components/ui/citycard";
-import { AddCityButton } from "./components/ui/addcitybutton";
 
 const units = {
   celsius: "°C",
@@ -10,10 +9,11 @@ const units = {
 };
 
 function App() {
-  const [location, setLocation] = useState("London");
+  const [location, setLocation] = useState("Jerusalem");
   const [temperature, setTemperature] = useState(null);
   const [unit, setUnit] = useState(units.celsius);
-  const [icon, setIcon] = useState();
+  const [icon, setIcon] = useState(null);
+  const [weatherCondition, setWeatherCondition] = useState(null);
 
   // API fetch
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -28,13 +28,24 @@ function App() {
       }
 
       const data = await response.json();
+      // console.log(data);
+
+      console.table([
+        data.location.name,
+        data.location.country,
+        data.current.condition.text,
+        data.current.temp_c,
+        data.current.temp_f,
+      ]);
 
       if (unit === units.celsius) {
         setTemperature(data.current.temp_c);
       } else if (unit === units.fahrenheit) {
         setTemperature(data.current.temp_f);
       }
-      console.log(data);
+
+      setWeatherCondition(data.current.condition.text);
+      setIcon(`https:${data.current.condition.icon}`);
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
       return null;
@@ -50,8 +61,10 @@ function App() {
     <>
       <div className="flex flex-col m-10 gap-5">
         <div className="flex flex-col place-items-center gap-8">
-          <h1 className="font-bold text-4xl ">Simple Weather</h1>
-          <p>Add up to 3 locations</p>
+          <h1 className="font-bold text-4xl text-center">
+            Simple Weather Card
+          </h1>
+          <p className="text-center">Click on the location to change it</p>
         </div>
 
         <div id="card" className="flex flex-row justify-evenly gap-1">
@@ -62,11 +75,9 @@ function App() {
             temperature={temperature}
             unit={unit}
             units={units}
+            icon={icon}
+            weatherCondition={weatherCondition}
           />
-        </div>
-
-        <div className="flex justify-center">
-          <AddCityButton>Add Location</AddCityButton>
         </div>
       </div>
     </>

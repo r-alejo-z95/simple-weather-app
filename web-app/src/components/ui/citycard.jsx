@@ -14,6 +14,8 @@ function CityCard({
   unit,
   units,
   onUnitChange,
+  icon,
+  weatherCondition,
 }) {
   return (
     <>
@@ -22,7 +24,10 @@ function CityCard({
           initialCityName={location}
           onCityNameChange={onLocationChange}
         />
-        <WeatherIcon />
+        <WeatherIcon>
+          <img src={icon} alt="Weather icon" />
+          <p>{weatherCondition}</p>
+        </WeatherIcon>
         <TempDisplay>
           {temperature} {unit}
         </TempDisplay>

@@ -87,13 +87,18 @@ function CardTitle({ initialCityName, onCityNameChange }) {
   );
 }
 
-function WeatherIcon({ className, ...props }) {
+function WeatherIcon({ children, className, ...props }) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6 flex justify-center", className)}
+      className={cn(
+        "px-6 flex flex-col items-center justify-center",
+        className
+      )}
       {...props}
-    />
+    >
+      {children}
+    </div>
   );
 }
 
