@@ -9,8 +9,10 @@ const units = {
 };
 
 function App() {
-  const [location, setLocation] = useState("Jerusalem");
+  const [location, setLocation] = useState("Dubai");
   const [temperature, setTemperature] = useState(null);
+  const [tempCelsius, setTempCelsius] = useState(null);
+  const [tempFahrenheit, setTempFahrenheit] = useState(null);
   const [unit, setUnit] = useState(units.celsius);
   const [icon, setIcon] = useState(null);
   const [weatherCondition, setWeatherCondition] = useState(null);
@@ -38,11 +40,12 @@ function App() {
         data.current.temp_f,
       ]);
 
-      if (unit === units.celsius) {
-        setTemperature(data.current.temp_c);
-      } else if (unit === units.fahrenheit) {
-        setTemperature(data.current.temp_f);
-      }
+      setTempCelsius(data.current.temp_c);
+      setTempFahrenheit(data.current.temp_f);
+
+      setTemperature(
+        unit === units.celsius ? data.current.temp_c : data.current.temp_f
+      );
 
       setWeatherCondition(data.current.condition.text);
       setIcon(`https:${data.current.condition.icon}`);
@@ -55,7 +58,11 @@ function App() {
   // Fetch data on location change
   useEffect(() => {
     fetchData();
-  }, [location, unit]);
+  }, [location]);
+
+  useEffect(() => {
+    setTemperature(unit === units.celsius ? tempCelsius : tempFahrenheit);
+  }, [unit, tempCelsius, tempFahrenheit]);
 
   return (
     <>
