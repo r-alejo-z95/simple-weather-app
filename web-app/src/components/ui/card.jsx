@@ -9,7 +9,7 @@ function Card({ className, ...props }) {
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm ",
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm w-60",
         className
       )}
       {...props}
@@ -70,13 +70,13 @@ function CardTitle({ initialCityName, onCityNameChange }) {
             }
           }}
           autoFocus
-          className="font-semibold mx-auto text-center max-w-28"
+          className="font-semibold mx-auto text-center max-w-40 text-[28px]"
         />
       ) : (
         <div
           data-slot="card-title"
           className={cn(
-            "leading-none font-semibold flex justify-center cursor-pointer"
+            "leading-none font-semibold flex justify-center text-center cursor-pointer text-3xl"
           )}
           onClick={handleClick}
         >
@@ -106,7 +106,7 @@ function TempDisplay({ className, ...props }) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6 flex justify-center", className)}
+      className={cn("px-6 flex justify-center text-xl", className)}
       {...props}
     />
   );
