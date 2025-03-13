@@ -1,5 +1,7 @@
 import "./App.css";
 
+import { FaGithub } from "react-icons/fa";
+
 import { useState, useEffect } from "react";
 import { CityCard } from "./components/ui/citycard";
 
@@ -32,13 +34,13 @@ function App() {
       const data = await response.json();
       // console.log(data);
 
-      console.table([
-        data.location.name,
-        data.location.country,
-        data.current.condition.text,
-        data.current.temp_c,
-        data.current.temp_f,
-      ]);
+      // console.table([
+      //   data.location.name,
+      //   data.location.country,
+      //   data.current.condition.text,
+      //   data.current.temp_c,
+      //   data.current.temp_f,
+      // ]);
 
       setTempCelsius(data.current.temp_c);
       setTempFahrenheit(data.current.temp_f);
@@ -85,6 +87,18 @@ function App() {
             icon={icon}
             weatherCondition={weatherCondition}
           />
+        </div>
+
+        <div className="flex flex-row gap-1 items-center justify-center text-center mt-32">
+          <footer>
+            Developed by{" "}
+            <a href="https://github.com/r-alejo-z95">
+              <span className="cursor-pointer text-sky-600 hover:underline hover:text-sky-500 visited:text-indigo-800">
+                Ramon Zambrano
+              </span>
+            </a>
+          </footer>
+          <FaGithub />
         </div>
       </div>
     </>
